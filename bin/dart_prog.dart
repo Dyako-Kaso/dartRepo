@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 void main(List<String> arguments) {
   /**
    * Author : Diyako Kaso
@@ -7,81 +9,92 @@ void main(List<String> arguments) {
    */
 
   /**
-   * Just like the other programming languages that are available , Dart programming language offers
-   * operators that work (equality , comparison and mathematical operations)
+   * dart programming language offers comparison operators that work on the operands to determine the Similarity
+   * and the differences between values. these operators are called (Relational Operators)
    */
 
-  // the increment operator is used to increment a value by 1 or by a specific number of values
-  int val1 = 5;
-  val1++;
-  print("value 1 is : ${val1}");
-
-  // the shorthand method of incrementing a value by a specific value same as [val2 = val2 + 3]
-  int val2 = 5;
-  val2 += 3;
-  print("value 2 is : ${val2}");
-
-  // the decrement operator is used to decrement a value by 1 or by a specific number of values
-  int val3 = 6;
-  val3--;
-  print("value 3 is : ${val3}");
-
-  // the shorthand method of decrementing a value by a specific value same as [val4 = val4 - 3]
-  int val4 = 5;
-  val4 -= 3;
-  print("value 4 is : ${val4}");
-
-  // the shorthand method of multiplying a value by a specific value same as [val5 = val5 * 6]
-  int val5 = 5;
-  val5 *= 6;
-  print("value 5 is : ${val5}");
-
-  /**
-   * the shorthand method of dividing a value by a specific value is used but the division operator
-   * only returns a (double) value hence the result of the division cannot be assigned to an (int)
-   * in the normal way and we must use the (~/) tilda and the division operator together in order
-   * to truncate or (remove) the decimal part of the result and assign to an (int) variable
-   */
-  double div1 = 25.0;
-  div1 /= 6.0;
-  print("Result of the (double) division is : ${div1}");
-
-  // division result assigned to an (int) variable
-
-  int div2 = 22;
-  div2 ~/= 4.50;
-  print("Result of the (int) division is : ${div2}");
-
-  //--------------Mathematical Operations with String Interpolation---------------//
-
-  /**
-   * The operators in dart also allow for mathematical operations to be performed on the values for instance
-   * The mulptiplication operator is used to multiply two or more numbers
-   */
+  // the greater than sign
   int numb1 = 5;
   int numb2 = 6;
-  print("Result of the Multiplication is equal to : ${numb1 * numb2}");
+  print(numb1 > numb2);
+
+  // the greater than or equal sign
+  int numb3 = 5;
+  int numb4 = 5;
+  print(numb3 >= numb4);
+
+  // the less than sign
+  int numb5 = 5;
+  int numb6 = 6;
+  print(numb5 < numb6);
+
+  // the less than or equal sign
+  int numb7 = 7;
+  int numb8 = 12;
+  print(numb7 <= numb8);
+
+  // the equal to sign
+  int numb9 = 10;
+  int numb10 = 9;
+  print(numb9 == numb10);
+
+  // the not equal to sign
+  int numb11 = 4;
+  int numb12 = 5;
+  print(numb11 != numb12);
 
   /**
-   * The division operator is used to divide two or more numbers used differently with (int) and (double)
+   * The dart programming language offers the typical control structures that are offered in the
+   * available programming languages. These control structures consists of (if , if-else , if-else-if , switch case)
    */
-  int numb3 = 10;
-  int numb4 = 3;
-  print(
-      "Result of the Division Operator (double) is equal to : ${numb3 / numb4}");
 
-  /**
-   * The division operator is used to divide two or more numbers used differently with (int) and (double)
-   */
-  int numb5 = 20;
-  int numb6 = 7;
-  print(
-      "Result of the Division Operator (int) is equal to : ${numb5 ~/ numb6}");
+  // the (if) statement only executes if the condtion is met otherwise nothing will happen as it does not have aletrnative route
+  String catName = "Mr.Meatball";
+  if (catName == "Mr.Meatball") {
+    print("You are correct !");
+  }
 
-  /**
-  * The modulus operator is used to show the remainder of the division operator
-  */
-  int numb7 = 10;
-  int numb8 = 5;
-  print("Remainder of the Division operation is equal to : ${numb7 % numb8}");
+  // the (if-else) statement checks the (if) first if it meets the condition it executes else checks the (else) statement for an alternative operation
+  int year = 2023;
+  if (year == 2022) {
+    print("it was a great year !");
+  } else {
+    print("let's wait and see how it turns out");
+  }
+
+  // the (if- else if -else) checks multiple conditions in order to find the correct choice if none of the condtions meet then it executes the (else) part
+  String footballClub = "Manchester United";
+  if (footballClub == "Paris Saint Germain") {
+    print("The French Club is becoming stronger");
+  } else if (footballClub == "Liverpool") {
+    print("You'll never walk alone !");
+  } else {
+    print("Despite the competition Manchester United rules");
+  }
+
+  // switch-case is more preferred when dealing with multiple conditions
+  int salary = 2250;
+  const taxRate = 0.12;
+
+  // note : switch case accepts (int) and (String) values not (double)
+  switch (salary) {
+    case 2250:
+      {
+        print(
+            "The salary is ${salary} and the income tax is ${taxRate} the salary after the income tax is ${salary - (salary * taxRate)}");
+      }
+      break;
+    case 2000:
+      {
+        print(
+            "The salary is less than the required amount to be multiplied by the income tax");
+      }
+      break;
+
+    default:
+      {
+        print("Low Salary - find a better job");
+      }
+      break;
+  }
 }
