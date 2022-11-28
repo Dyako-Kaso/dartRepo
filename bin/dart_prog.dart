@@ -9,92 +9,157 @@ void main(List<String> arguments) {
    */
 
   /**
-   * dart programming language offers comparison operators that work on the operands to determine the Similarity
-   * and the differences between values. these operators are called (Relational Operators)
+   * Dart programming language offers optional parameters in methods (functions) in order to supply optional information
+   * even if the optional parameters did not recieve any values the method will still run.
+   * The optional parameters could be assigned a (default value) or be declared as a (?) nullable variable
    */
 
-  // the greater than sign
-  int numb1 = 5;
-  int numb2 = 6;
-  print(numb1 > numb2);
+  // printValues() method is declared outside of the main() method however it is called from within the main() method
+  printValues();
 
-  // the greater than or equal sign
-  int numb3 = 5;
-  int numb4 = 5;
-  print(numb3 >= numb4);
+  // printDefaultValues() without values being passed to it
+  printDefaultValues();
 
-  // the less than sign
-  int numb5 = 5;
-  int numb6 = 6;
-  print(numb5 < numb6);
+  // printDefaultValues() when values are passed to it
+  printDefaultValues("John Doe");
 
-  // the less than or equal sign
-  int numb7 = 7;
-  int numb8 = 12;
-  print(numb7 <= numb8);
+  // Named optional parameters with nullable (?) and without default value
+  namedOptionalParam(firstName: "Diako", lastName: "Kaso");
 
-  // the equal to sign
-  int numb9 = 10;
-  int numb10 = 9;
-  print(numb9 == numb10);
+  // Named Optional Parameters with default values (lastName : 'afandi')
+  namedOptionalParamDefaultValue(firstName: "Muhammed");
 
-  // the not equal to sign
-  int numb11 = 4;
-  int numb12 = 5;
-  print(numb11 != numb12);
+  // Named Optional Parameters with (required) keyword if required field not supplied then causes error
+  namedOptionalRequired(stdID: "QU-180095");
+
+  // combining the positional params with the named optional parameters
+  namedAndPositionalParams("Software Engineering");
+
+  //-------------------- Lambda (Annonymous) Functions and High-Order Functions -------------------//
 
   /**
-   * The dart programming language offers the typical control structures that are offered in the
-   * available programming languages. These control structures consists of (if , if-else , if-else-if , switch case)
+   * Lambda (Annonymous) methods or functions are functions that do not have an explicit (method name and return type)
+   * it has a (parameter) {body of method} format.
+   *
+   * The variable that is assigned the method can call the method using the same variable as the variable name
+   * become the function name and you can pass data to it's parameters.
+   *
+   * The (Function) datatype can be used in the variable declaration but you can also use (var) and (final)
+   *
    */
 
-  // the (if) statement only executes if the condtion is met otherwise nothing will happen as it does not have aletrnative route
-  String catName = "Mr.Meatball";
-  if (catName == "Mr.Meatball") {
-    print("You are correct !");
-  }
+  // annonmous function is assigned to the (var) variable
+  var annonymousMethod = (int x) {
+    return x * 2;
+  };
+  print(annonymousMethod(4));
 
-  // the (if-else) statement checks the (if) first if it meets the condition it executes else checks the (else) statement for an alternative operation
-  int year = 2023;
-  if (year == 2022) {
-    print("it was a great year !");
-  } else {
-    print("let's wait and see how it turns out");
-  }
+  // annonmous function is assigned to the (final) variable
+  final squared = (int y) {
+    return y * y;
+  };
+  print(squared(8));
 
-  // the (if- else if -else) checks multiple conditions in order to find the correct choice if none of the condtions meet then it executes the (else) part
-  String footballClub = "Manchester United";
-  if (footballClub == "Paris Saint Germain") {
-    print("The French Club is becoming stronger");
-  } else if (footballClub == "Liverpool") {
-    print("You'll never walk alone !");
-  } else {
-    print("Despite the competition Manchester United rules");
-  }
+  // annoymous function is assigned to the (Function) variable and the fat arrow (=>) notation has been used to return values
+  Function quadraple = (int z) => z * z * z * z;
+  print(quadraple(2));
 
-  // switch-case is more preferred when dealing with multiple conditions
-  int salary = 2250;
-  const taxRate = 0.12;
+  // A Higher-Order Function that takes in another method and returns it to the callSquared (Function) variable and calls the values
+  Function callSquared = squaredMethod(squareValues);
+  print(callSquared(12));
 
-  // note : switch case accepts (int) and (String) values not (double)
-  switch (salary) {
-    case 2250:
-      {
-        print(
-            "The salary is ${salary} and the income tax is ${taxRate} the salary after the income tax is ${salary - (salary * taxRate)}");
-      }
-      break;
-    case 2000:
-      {
-        print(
-            "The salary is less than the required amount to be multiplied by the income tax");
-      }
-      break;
+  // A Higher-Order Function that takes an annonymous function as parameter
+  Function callSquared2 = squaredMethod((z) => z * z);
+  print(callSquared2(20));
 
-    default:
-      {
-        print("Low Salary - find a better job");
-      }
-      break;
-  }
+  // A Higher-Order Function that takes an annonymous function as parameter with typedef declared
+  Function callSquared3 = squaredMethod((y) => y * y);
+  print(callSquared3(40));
+} // end of main() method
+
+/**
+ * methods in dart programming language has a similar syntax to programming languages like (C++) and (Java)
+ * as it requires a return type to be specified and the parameters must have a data type infront of their declaration
+ * methods in dart programming language can be declared outside of the main() method and be called from within the
+ * main() method.
+ */
+
+// optional parameter declared in printValues() method that does not have a default value hence declared as nullable
+void printValues([String? name]) {
+  print("My Name is ${name}");
+}
+
+// if an optional parameter has a default value then even if no values were passed to the variable in the method the default value will be used
+void printDefaultValues([String name = "Diako"]) {
+  print("My Name is ${name}");
+}
+
+/**
+ * Named optional parameters are another type of optional parameters which are used to supply optional values to
+ * the method. Named optional parameters are invoked by name in method calls. denoted by curly braces { }
+ * when a method is called you can assign values to the named optional parameters by (variableName : value) format
+ */
+
+// you can use nullable (?) and default values with Named optional parameters as well.
+// nullable is used when you are not sure if the variable will be assigned any values in the program hence avoiding exceptions
+void namedOptionalParam({String? firstName, String? lastName}) {
+  print("My Full Name is ${firstName} ${lastName}");
+}
+
+//  Named Optional parameters with default values
+void namedOptionalParamDefaultValue(
+    {String? firstName, String lastName = "Afandi"}) {
+  print("My Full Name is ${firstName} ${lastName}");
+}
+
+// you can make the parameters required using the (required) keyword
+void namedOptionalRequired({required String stdID, String? stdName}) {
+  print("The student ID is ${stdID} and the student name is ${stdName}");
+}
+
+/**
+ * In dart programming language you can combine both the positional parameters and the optional parameters
+ */
+
+void namedAndPositionalParams(String? stdMajor, {String name = "Diako"}) {
+  print("The student's major is ${stdMajor} and the student's name is ${name}");
+}
+
+//-------------------- Lambda (Annonymous) Functions and High-Order Functions -------------------//
+
+/**
+ * A Higher-Order function is a function that accepts a method (function) as parameter or returns a method
+ * You can pass an annonymous function to the higher-order function when called (invoked)
+ */
+
+/**
+ * The Higher-Order function that accepts a method and return that method to the
+ * (Function) variable in order to call and invoke it. when invoked the value or parameter passed
+ * to the (Function) variable will be passed to the (x) parameter and then passed to the (meth(x)) method
+ * then the meth() method will execute the method that had been passed to the (squaredMethod) method
+ */
+
+// The Higher-Order Function
+int Function(int) squaredMethod(int Function(int) meth) {
+  return (int x) {
+    return meth(x);
+  };
+}
+
+// A method that is used as a Higher-Order method parameter in order to perform the following operations when invoked
+int squareValues(int x) {
+  return x * x;
+}
+
+/**
+ * You can use the (typedef) variable in order to assign it a method and use it in higher-order function instead of
+ * long method declarations with method name and method parameters and return types
+ */
+
+typedef IntReturningFunction = int Function(int);
+
+IntReturningFunction squaredMethod2(int Function(int) meth) {
+  return (int x) {
+    return meth(x);
+  };
 }
