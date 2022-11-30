@@ -9,157 +9,94 @@ void main(List<String> arguments) {
    */
 
   /**
-   * Dart programming language offers optional parameters in methods (functions) in order to supply optional information
-   * even if the optional parameters did not recieve any values the method will still run.
-   * The optional parameters could be assigned a (default value) or be declared as a (?) nullable variable
+   * Dart Programming Language offers many data structures that can be used to store data for different
+   * purposes each one of them used for their own distinct purposes.
    */
-
-  // printValues() method is declared outside of the main() method however it is called from within the main() method
-  printValues();
-
-  // printDefaultValues() without values being passed to it
-  printDefaultValues();
-
-  // printDefaultValues() when values are passed to it
-  printDefaultValues("John Doe");
-
-  // Named optional parameters with nullable (?) and without default value
-  namedOptionalParam(firstName: "Diako", lastName: "Kaso");
-
-  // Named Optional Parameters with default values (lastName : 'afandi')
-  namedOptionalParamDefaultValue(firstName: "Muhammed");
-
-  // Named Optional Parameters with (required) keyword if required field not supplied then causes error
-  namedOptionalRequired(stdID: "QU-180095");
-
-  // combining the positional params with the named optional parameters
-  namedAndPositionalParams("Software Engineering");
-
-  //-------------------- Lambda (Annonymous) Functions and High-Order Functions -------------------//
 
   /**
-   * Lambda (Annonymous) methods or functions are functions that do not have an explicit (method name and return type)
-   * it has a (parameter) {body of method} format.
-   *
-   * The variable that is assigned the method can call the method using the same variable as the variable name
-   * become the function name and you can pass data to it's parameters.
-   *
-   * The (Function) datatype can be used in the variable declaration but you can also use (var) and (final)
-   *
+   * Lists are the first data structure in dart programming language that can be seen as a replacement of arrays
+   * lists can be (appended) values as well as getting their lengths and lists can be cleared (emptied) using the
+   * .clear() method which is a part of the many methods that can be done on lists in dart programming language
+   * Lists are declared using the (List) keyword, it's values are placed within brackets []
    */
 
-  // annonmous function is assigned to the (var) variable
-  var annonymousMethod = (int x) {
-    return x * 2;
+  // lists can be declared explicitely using the keyword (List)
+  List list1 = [1, 2, 3];
+  print(list1);
+
+  // lists can also be declared explicitely for a specific datatype using List <datatype>
+  List<String> listOfStrings = [
+    "Software Engineering",
+    "Network Security",
+    "Information Technology"
+  ];
+  print(listOfStrings);
+
+  /**
+   * lists can also be declared implicitely using the (var) and the (final) keywords as one of the capabilties of
+   * dart programming language it type-inference , meaning that dart programming language based on the values
+   * assigned to a variable will know which type of variable it is
+   */
+  final impList1 = [4, 6, 8];
+  print(impList1);
+
+  // lists can be declared implicitely for a specific data type.
+  final impList2 = <String>["Hello", "Hi", "Hey"];
+  print(impList2);
+
+  // in order to know how many elements are inside of a list you can use the (.length()) method
+  final impList3 = <int>[6, 5, 4, 3, 2, 1];
+  print(impList3.length);
+
+  /**
+   * MAP is another data structure that is offered in dart programming language , it maps keys to values
+   * you can declare specific data types for the (keys) and the (values) using Map <int , String> = {'key':'value'}
+   * The difference between Maps and lists in declaration is the usage of brackets [] and curly braces {}
+   */
+
+  // you can explicitely declare maps using the (Map) keyword
+  Map<int, String> map1 = {1: "Diako", 2: "Hala", 3: "Parza"};
+
+  /**
+   * Best way to iterate through data structures like Maps and Lists and Sets is the usage of (For) loops
+   * fortunately the syntax of the (for) loop in dart programming language is similar to the other object
+   * oriented programming language like (Java) and (C++)
+   */
+
+  for (int i = 1; i <= map1.length; i++) {
+    print(map1[i]);
+  }
+
+  // you can also declare Maps implicitely with (var) and (final) variable
+  final map2 = <dynamic, dynamic>{
+    1: "Software Engineering",
+    2: "BioMedical Engineering",
+    3: "Human Resource Development"
   };
-  print(annonymousMethod(4));
 
-  // annonmous function is assigned to the (final) variable
-  final squared = (int y) {
-    return y * y;
-  };
-  print(squared(8));
+  // forEach loop is a very efficient loop to use with Maps as it outputs both the (key) and (value) with ease
+  map2.forEach((key, value) {
+    print('key : ${key} , value : ${value}');
+  });
 
-  // annoymous function is assigned to the (Function) variable and the fat arrow (=>) notation has been used to return values
-  Function quadraple = (int z) => z * z * z * z;
-  print(quadraple(2));
+  /**
+   * Sets are another data structure that is similar to Maps in terms of declaration but it only takes in one element at a time
+   * repetition in sets get ignored when the values are outputted or the (.length) method is used it does not count duplicate values
+   * sets are declared as   Set <int> setName = {1,2,3,4}    with curly braces
+   */
 
-  // A Higher-Order Function that takes in another method and returns it to the callSquared (Function) variable and calls the values
-  Function callSquared = squaredMethod(squareValues);
-  print(callSquared(12));
+  Set<int> set1 = {1, 2, 2, 3};
+  set1.forEach((element) {
+    print(element);
+  });
 
-  // A Higher-Order Function that takes an annonymous function as parameter
-  Function callSquared2 = squaredMethod((z) => z * z);
-  print(callSquared2(20));
+  print("---------------------Set2------------------------");
 
-  // A Higher-Order Function that takes an annonymous function as parameter with typedef declared
-  Function callSquared3 = squaredMethod((y) => y * y);
-  print(callSquared3(40));
-} // end of main() method
+  // you can declare Sets with the (final) and the (var) keywords
+  final set2 = <int>{5, 6, 7, 8, 8};
+  set2.forEach((element) {
+    print(element);
+  });
 
-/**
- * methods in dart programming language has a similar syntax to programming languages like (C++) and (Java)
- * as it requires a return type to be specified and the parameters must have a data type infront of their declaration
- * methods in dart programming language can be declared outside of the main() method and be called from within the
- * main() method.
- */
-
-// optional parameter declared in printValues() method that does not have a default value hence declared as nullable
-void printValues([String? name]) {
-  print("My Name is ${name}");
-}
-
-// if an optional parameter has a default value then even if no values were passed to the variable in the method the default value will be used
-void printDefaultValues([String name = "Diako"]) {
-  print("My Name is ${name}");
-}
-
-/**
- * Named optional parameters are another type of optional parameters which are used to supply optional values to
- * the method. Named optional parameters are invoked by name in method calls. denoted by curly braces { }
- * when a method is called you can assign values to the named optional parameters by (variableName : value) format
- */
-
-// you can use nullable (?) and default values with Named optional parameters as well.
-// nullable is used when you are not sure if the variable will be assigned any values in the program hence avoiding exceptions
-void namedOptionalParam({String? firstName, String? lastName}) {
-  print("My Full Name is ${firstName} ${lastName}");
-}
-
-//  Named Optional parameters with default values
-void namedOptionalParamDefaultValue(
-    {String? firstName, String lastName = "Afandi"}) {
-  print("My Full Name is ${firstName} ${lastName}");
-}
-
-// you can make the parameters required using the (required) keyword
-void namedOptionalRequired({required String stdID, String? stdName}) {
-  print("The student ID is ${stdID} and the student name is ${stdName}");
-}
-
-/**
- * In dart programming language you can combine both the positional parameters and the optional parameters
- */
-
-void namedAndPositionalParams(String? stdMajor, {String name = "Diako"}) {
-  print("The student's major is ${stdMajor} and the student's name is ${name}");
-}
-
-//-------------------- Lambda (Annonymous) Functions and High-Order Functions -------------------//
-
-/**
- * A Higher-Order function is a function that accepts a method (function) as parameter or returns a method
- * You can pass an annonymous function to the higher-order function when called (invoked)
- */
-
-/**
- * The Higher-Order function that accepts a method and return that method to the
- * (Function) variable in order to call and invoke it. when invoked the value or parameter passed
- * to the (Function) variable will be passed to the (x) parameter and then passed to the (meth(x)) method
- * then the meth() method will execute the method that had been passed to the (squaredMethod) method
- */
-
-// The Higher-Order Function
-int Function(int) squaredMethod(int Function(int) meth) {
-  return (int x) {
-    return meth(x);
-  };
-}
-
-// A method that is used as a Higher-Order method parameter in order to perform the following operations when invoked
-int squareValues(int x) {
-  return x * x;
-}
-
-/**
- * You can use the (typedef) variable in order to assign it a method and use it in higher-order function instead of
- * long method declarations with method name and method parameters and return types
- */
-
-typedef IntReturningFunction = int Function(int);
-
-IntReturningFunction squaredMethod2(int Function(int) meth) {
-  return (int x) {
-    return meth(x);
-  };
+  print("The length of Set 2 is ${set2.length}");
 }
